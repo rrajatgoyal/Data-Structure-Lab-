@@ -2,16 +2,25 @@
 #include<conio.h>
 #include<stdlib.h>
 using namespace std;
-int a[10][10],i,j,k,n,stk[10],top,v,visit[10],visited[10],x,y;
-
-main()
+int a[10][10],i,j,k,n,stk[10],top=0,v,visit[10],visited[10],x,y;
+void DFS(int i)
 {
-cout <<"enter no. of vertices SIR/MAM!";
+    int j;
+    cout<<i<<" ";
+    visited[i]=1;
+
+    for(j=0;j<n;j++)
+       if(!visited[j]&&a[i][j]==1)
+            DFS(j);
+}
+int main()
+{
+cout <<"enter no. of vertices";
 cin >> n;
-cout<<"sir please enter for undirected grah"<<endl;
+cout<<"enter for undirected grah"<<endl;
      cin>>x>>y;
     if(x>=n&&y>=n)
-        cout<<"sir ji please enter within range"<<endl;
+        cout<<"please enter within range"<<endl;
         else
         {
     while(x!=-1&&y!=-1)
@@ -22,24 +31,15 @@ cout<<"sir please enter for undirected grah"<<endl;
 
     }
     }
+    for(i=0;i<n;i++)
+    { cout<<endl;
+        for(j=0;j<n;j++)
+            cout<<a[i][j]<<" ";
+    }
 cout <<"enter initial vertex";
 cin >>v;
-cout <<"AFTER DFS ,SIR ORDER COMES -:"<<endl;
-cout << v <<" ";
-visited[v]=1;
-k=1;
-while(k<n)
-{
-for(j=n;j>=1;j--)
-if(a[v][j]!=0 && visited[j]!=1 && visit[j]!=1)
-{
-visit[j]=1;
-stk[top]=j;
-top++;
-}
-v=stk[--top];
-cout<<v << " ";
-k++;
-visit[v]=0; visited[v]=1;
-}
+cout <<"AFTER DFS ORDER COMES -:"<<endl;
+for(i=0;i<n;i++)
+    visited[i]=0;
+DFS(v);
 }
